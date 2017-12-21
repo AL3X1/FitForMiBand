@@ -1,0 +1,58 @@
+﻿<Page
+    x:Class="NotifyMiBand2.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NotifyMiBand2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="146"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Background="#005aa3">
+            <TextBlock Text="settings" HorizontalAlignment="Left" FontSize="30" Margin="10, 60, 0, 0" Foreground="White" FontWeight="Light"/>
+            <Image Source="ms-appx:///Assets/Symbols/settings.png" HorizontalAlignment="Right" Margin="10" Height="30"/>
+        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
+            <StackPanel Margin="20" MaxWidth="560" HorizontalAlignment="Center">
+                <ProgressBar Name="pbProcessing" IsEnabled="True" IsIndeterminate="True" Visibility="Collapsed"/>
+                <TextBlock Text="Available display items" FontSize="20" Margin="0,10,0,5" />
+                <TextBlock Text="" Name="lblDisplayItems" Foreground="DarkGray"/>
+                <HyperlinkButton Content="Tap to customize display items" Name="hlbMenu" Click="hlbMenu_Click" />
+                <TextBlock Text="Additional display features" FontSize="20" Margin="0,10,0,5" />
+                <ToggleSwitch Header="Activate display on wrist lift" Name="tsDisplay" Toggled="tsDisplay_Toggled" />
+                <ToggleSwitch Header="12h Time-Format" Name="tsTimeformat" Toggled="tsTimeformat_Toggled"/>
+                <ToggleSwitch Header="Display Date and Time" Name="tsDate" Toggled="tsDate_Toggled" />
+                <ToggleSwitch Header="Switch info on wrist rotate" Name="tsRotate" Toggled="tsRotate_Toggled"/>
+                <TextBlock Text="Device" FontSize="20" Margin="0,10,0,5" />
+                <TextBlock Text="Wear location"/>
+                <RadioButton Name="rbRightHand" Content="Right Hand" Click="rbRightHand_Click"/>
+                <RadioButton Name="rbLeftHand" Content="Left Hand" Click="rbLeftHand_Click"/>
+                <ToggleSwitch Header="Do not disturb (automatic mode)" Name="tsDnD" Toggled="tsDnD_Toggled"/>
+                <TextBlock Text="Notifications" FontSize="20" Margin="0,10,0,5" />
+                <ToggleSwitch Header="Goal Notification" Name="tsGoal" Toggled="tsGoal_Toggled" />
+                <ToggleSwitch Header="Message Notification" Name="tsMessage" Toggled="tsMessage_Toggled" />
+                <TextBlock Text="Syncronisation" FontSize="20" Margin="0,10,0,5" />
+                <ComboBox Name="chkPeriodicSync" HorizontalAlignment="Stretch" Header="Periodic Sync (in minutes)" SelectionChanged="chkPeriodicSync_SelectionChanged">
+                    <x:String>Off</x:String>
+                    <x:String>15</x:String>
+                    <x:String>30</x:String>
+                    <x:String>45</x:String>
+                    <x:String>60</x:String>
+                    <x:String>120</x:String>
+                    <x:String>180</x:String>
+                    <x:String>240</x:String>
+                    <x:String>300</x:String>
+                    <x:String>360</x:String>
+                    <x:String>420</x:String>
+                    <x:String>480</x:String>
+                </ComboBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
+
+    

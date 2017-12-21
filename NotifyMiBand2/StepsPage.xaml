@@ -1,0 +1,152 @@
+﻿<Page
+    x:Class="NotifyMiBand2.StepsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NotifyMiBand2"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Transitions>
+            <TransitionCollection>
+                <NavigationThemeTransition/>
+            </TransitionCollection>
+        </Grid.Transitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="146"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Background="#005aa3">
+            <TextBlock Text="" Foreground="#99bdda" Margin="10,40,0,0" Name="lblTitle" />
+            <TextBlock Text="steps summary" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
+            <Image Source="ms-appx:///Assets/Symbols/steps.png" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Height="30"/>
+        </StackPanel>
+        <Pivot Grid.Row="1" Margin="0,0,0,0">
+            <PivotItem Header="day">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <controls:RadialProgressBar x:Name="rpbcDailySteps" Value="0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Thickness="6" Minimum="0" Width="150" Height="150" Outline="DarkGray"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="0"  Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontSize="40" FontWeight="Light" Name="lblSteps" />
+                            <TextBlock Text="steps" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Light" VerticalAlignment="Center" Margin="5,20,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Activity details" FontSize="20"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                <TextBlock Text="Total distance" Foreground="Gray"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontSize="40" FontWeight="Light" Name="lblDistanceDetailsDay" />
+                                    <TextBlock Text="km" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Light" VerticalAlignment="Center" Margin="5,20,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                <TextBlock Text="Total calories" Foreground="Gray"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontSize="40" FontWeight="Light" Name="lblCalsDetailsDay" />
+                                    <TextBlock Text="cals" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Light" VerticalAlignment="Center" Margin="5,20,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="week">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay1" Grid.Row="0"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay1" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="0" Height="30"/>
+                            <TextBlock Text="" Name="lblValueDay1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="0" />
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay2" Grid.Row="1"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay2" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="1" Height="30" />
+                            <TextBlock Text="" Name="lblValueDay2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="1" />
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay3" Grid.Row="2"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay3" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="2"  Height="30"/>
+                            <TextBlock Text="" Name="lblValueDay3" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="2" />
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay4" Grid.Row="3"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay4" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="3"  Height="30"/>
+                            <TextBlock Text="" Name="lblValueDay4" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="3" />
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay5" Grid.Row="4"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay5" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="4"  Height="30"/>
+                            <TextBlock Text="" Name="lblValueDay5" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="4" />
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay6" Grid.Row="5"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay6" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="5"  Height="30"/>
+                            <TextBlock Text="" Name="lblValueDay6" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="5" />
+
+                            <TextBlock Text="" VerticalAlignment="Center" Name="lblDay7" Grid.Row="6"/>
+                            <ProgressBar Grid.Column="1" IsEnabled="True" Name="pbDay7" Visibility="Visible" Value="0" Maximum="100" Minimum="0" Margin="5" Grid.Row="6"  Height="30"/>
+                            <TextBlock Text="" Name="lblValueDay7" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Light" FontSize="10" Grid.Row="6" />
+                        </Grid>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="2">
+                        <TextBlock Text="Activity details" FontSize="20"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                <TextBlock Text="Total distance" Foreground="Gray"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontSize="40" FontWeight="Light" Name="lblDistanceDetailsWeek" />
+                                    <TextBlock Text="km" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Light" VerticalAlignment="Center" Margin="5,20,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                <TextBlock Text="Total calories" Foreground="Gray"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontSize="40" FontWeight="Light" Name="lblCalsDetailsWeek" />
+                                    <TextBlock Text="kcal" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Light" VerticalAlignment="Center" Margin="5,20,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

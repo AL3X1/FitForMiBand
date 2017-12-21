@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="NotifyMiBand2.BatteryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NotifyMiBand2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Transitions>
+            <TransitionCollection>
+                <NavigationThemeTransition/>
+            </TransitionCollection>
+        </Grid.Transitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="146"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Background="#005aa3">
+            <TextBlock Text="" Foreground="White" Margin="10,40,0,0" Name="lblBefore" />
+            <TextBlock Text="battery information" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
+            <Image Source="ms-appx:///Assets/Symbols/akku.png" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Height="30"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Charging date: 12/10/2017" Name="lblChargingDate" />
+                </StackPanel>
+                <TextBlock Text="81%" Name="lblPercentage" FontSize="38" FontWeight="Light" />
+                <ProgressBar Name="pgPercentage" Minimum="0" Maximum="100" />
+                <TextBlock Text="Estimated time remaining: 2 days 22 minutes" Foreground="DarkGray" Name="lblEstimated" TextWrapping="WrapWholeWords" />
+                <TextBlock Text="Power saving mode" Margin="0,20,0,5" FontSize="20" />
+                <TextBlock Text="Extends battery life by limiting background activity when the device is low on battery power." TextWrapping="WrapWholeWords"/>
+                <CheckBox Content="Automatically activate power-saving mode if the battery level drops below the following value:" Name="chkSlider" Checked="chkSlider_Checked" Unchecked="chkSlider_Unchecked"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                    <Slider Minimum="0" Maximum="100" Value="20" Name="sliderPowerSaving" Width="250" ValueChanged="sliderPowerSaving_ValueChanged" IsEnabled="false" />
+                    <TextBlock Text="20%" VerticalAlignment="Center" FontSize="20" Margin="10,-5,0,0" Name="lblDisplaySliderValue"/>
+                </StackPanel>
+                <ToggleSwitch>
+                    <ToggleSwitch.Header>
+                        <TextBlock Text="Status of the power-saving mode until the next charging" TextWrapping="WrapWholeWords"/>
+                    </ToggleSwitch.Header>
+                </ToggleSwitch>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

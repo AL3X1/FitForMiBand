@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="NotifyMiBand2.WelcomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NotifyMiBand2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Transitions>
+            <TransitionCollection>
+                <NavigationThemeTransition/>
+            </TransitionCollection>
+        </Grid.Transitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="146"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Background="#005aa3">
+            <TextBlock Text="setup your fitness-goals and connect to device" Foreground="#99bdda" Margin="10,40,0,0" />
+            <TextBlock Text="welcome" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
+            <Image Source="ms-appx:///Assets/Symbols/welcome.png" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Height="30"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" MaxWidth="500">
+            <StackPanel Margin="20">
+                <ProgressBar Name="pbAuthorize" IsIndeterminate="True" Margin="10" Visibility="Collapsed"/>
+                <TextBlock Text="Setup your Device" Margin="0,10,0,5" FontSize="20"/>
+                <Button Name="btnAddDevice" Content="Add Device" Click="btnAddDevice_Click"/>
+                <StackPanel Name="spDeviceinformations" Visibility="Collapsed">
+                    <TextBlock Text="Selected Device" Margin="0,10,0,5"/>
+                    <TextBox PlaceholderText="Device Name" IsEnabled="False" Name="txtDeviceName" Margin="0,5,0,5"/>
+                    <TextBox PlaceholderText="Device ID" IsEnabled="False" Name="txtDeviceId" />
+                </StackPanel>
+                <TextBlock Text="Setup your profile" TextWrapping="WrapWholeWords" FontSize="20" Margin="0,20,10,5"/>
+                <TextBlock Text="Alias"/>
+                <TextBox PlaceholderText="Alias" MaxLength="18" Margin="0,0,0,5" Name="txtAlias"/>
+                <TextBlock Text="Gender"/>
+                <ComboBox PlaceholderText="Gender" HorizontalAlignment="Stretch" Name="cboGender" Margin="0,0,0,5" >
+                    <x:String>Male</x:String>
+                    <x:String>Female</x:String>
+                </ComboBox>
+                <TextBlock Text="Date of birth"/>
+                <DatePicker HorizontalAlignment="Stretch" Name="dtpDateOfBirth" Margin="0,0,0,5"  />
+                <TextBlock Text="Height"/>
+                <ComboBox Name="cboHeight" HorizontalAlignment="Stretch" PlaceholderText="Height (in cm)" Margin="0,0,0,5" />
+                <TextBlock Text="Weight"/>
+                <ComboBox Name="cboWeight" HorizontalAlignment="Stretch" PlaceholderText="Weight (in kg)" Margin="0,0,0,5" />
+                <TextBlock Text="Daily step goal"/>
+                <ComboBox Name="cboSteps" HorizontalAlignment="Stretch" PlaceholderText="Steps" Margin="0,0,0,5" />
+                <TextBlock Text="Daily sleep goal (in hours)"/>
+                <TimePicker Name="dtpSleep" ClockIdentifier="24HourClock" HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Row="2" Background="{ThemeResource AppBarBackgroundThemeBrush}">
+            <AppBarButton Icon="Save" Label="Finish" Name="btnSave" HorizontalAlignment="Center" Click="btnSave_Click" IsEnabled="False"/>
+        </Grid>
+    </Grid>
+</Page>
