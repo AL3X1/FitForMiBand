@@ -34,7 +34,6 @@
                 <ToggleSwitch Header="Do not disturb (automatic mode)" Name="tsDnD" Toggled="tsDnD_Toggled"/>
                 <TextBlock Text="Notifications" FontSize="20" Margin="0,10,0,5" />
                 <ToggleSwitch Header="Goal Notification" Name="tsGoal" Toggled="tsGoal_Toggled" />
-                <ToggleSwitch Header="Message Notification" Name="tsMessage" Toggled="tsMessage_Toggled" />
                 <TextBlock Text="Syncronisation" FontSize="20" Margin="0,10,0,5" />
                 <ComboBox Name="chkPeriodicSync" HorizontalAlignment="Stretch" Header="Periodic Sync (in minutes)" SelectionChanged="chkPeriodicSync_SelectionChanged">
                     <x:String>Off</x:String>

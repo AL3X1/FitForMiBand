@@ -123,9 +123,8 @@ Public Class CustomMiBand
                 _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Heartrate, _HeartResult.HeartRate.ToString("N0"), _HeartResult.Title))
             End If
 
-            If _NotificationResult.Initialize Then
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Notifications, _NotificationResult.Requests.Count.ToString, "Active"))
-            End If
+            NotificationResult.Initialize()
+            _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Notifications, _NotificationResult.Requests.Count.ToString, "Active"))
 
         Else
             LocalSettings.Values("Setting_8") = True
@@ -133,7 +132,7 @@ Public Class CustomMiBand
         End If
     End Sub
 
-    Private Async Function ConnectWithAuth() As Task(Of Boolean)
+    Public Async Function ConnectWithAuth() As Task(Of Boolean)
         Try
             Device = Await BluetoothLEDevice.FromIdAsync(_DeviceId)
             If Device IsNot Nothing Then
@@ -583,9 +582,10 @@ Public Class CustomMiBand
 
                 _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Heartrate, _HeartResult.HeartRate.ToString("N0"), HeartResult.Title))
 
-                If NotificationResult.Initialize() Then
-                    _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Notifications, _NotificationResult.Requests.Count.ToString, "Active"))
-                End If
+                NotificationResult.Initialize()
+                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Notifications, _NotificationResult.Requests.Count.ToString, "Active"))
+
+                OnPropertyChanged("DisplayItems")
 
                 Return True
 

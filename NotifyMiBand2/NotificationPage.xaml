@@ -45,7 +45,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Background="#005aa3">
-            <TextBlock Text="" Foreground="White" Margin="10,40,0,0" Name="lblBefore" />
+            <TextBlock Text="recorded notifications will be added automatically" Foreground="DarkGray" Margin="10,40,0,0" Name="lblBefore" />
             <TextBlock Text="notifications" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
             <Image Source="ms-appx:///Assets/Symbols/message.png" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Height="30"/>
         </StackPanel>

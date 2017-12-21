@@ -67,10 +67,7 @@
                 <CommandBar>
                     <AppBarButton Icon="Sync" Label="Sync" Name="btnSync" Click="btnSync_Click"/>
                     <AppBarButton Icon="ContactInfo" Label="Profile" Name="btnProfile" Click="btnProfile_Click"/>
-                    <CommandBar.SecondaryCommands>
-                        <AppBarButton Icon="Manage" Label="Device" Name="btnDevice" Click="btnDevice_Click"/>
-                        <AppBarButton Icon="Setting" Label="Settings" Name="btnSetting" Click="btnSetting_Click" />
-                    </CommandBar.SecondaryCommands>
+                    <AppBarButton Icon="Setting" Label="Settings" Name="btnSetting" Click="btnSetting_Click" />
                 </CommandBar>
             </controls:MasterDetailsView.MasterCommandBar>
         </controls:MasterDetailsView>

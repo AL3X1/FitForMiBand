@@ -58,13 +58,10 @@ Public NotInheritable Class SettingsPage
             App.LocalSettings.Values(String.Format("Setting_{0}_IsEnabled", CInt(CustomMiBandResult.BandOperation.Notifications))) = False
         End If
 
-        tsMessage.IsEnabled = Convert.ToBoolean(App.LocalSettings.Values(String.Format("Setting_{0}_IsEnabled", CInt(CustomMiBandResult.BandOperation.Notifications))))
-
         If App.LocalSettings.Values("IsDisplayOnLiftWristEnabled") IsNot Nothing Then tsDisplay.IsOn = Convert.ToBoolean(App.LocalSettings.Values("IsDisplayOnLiftWristEnabled"))
         If App.LocalSettings.Values("Is12hEnabled") IsNot Nothing Then tsTimeformat.IsOn = Convert.ToBoolean(App.LocalSettings.Values("Is12hEnabled"))
         If App.LocalSettings.Values("IsDateEnabled") IsNot Nothing Then tsDate.IsOn = Convert.ToBoolean(App.LocalSettings.Values("IsDateEnabled"))
         If App.LocalSettings.Values("IsGoalNotificationEnabled") IsNot Nothing Then tsGoal.IsOn = Convert.ToBoolean(App.LocalSettings.Values("IsGoalNotificationEnabled"))
-        If App.LocalSettings.Values(String.Format("Setting_{0}", CustomMiBandResult.BandOperation.Notifications)) IsNot Nothing Then tsMessage.IsOn = Convert.ToBoolean(App.LocalSettings.Values(String.Format("Setting_{0}", CustomMiBandResult.BandOperation.Notifications)))
         If App.LocalSettings.Values("IsRotateWristToSwitchInfoEnabled") IsNot Nothing Then tsRotate.IsOn = Convert.ToBoolean(App.LocalSettings.Values("IsRotateWristToSwitchInfoEnabled"))
         If App.LocalSettings.Values("IsWearLocationRightEnabled") IsNot Nothing Then
             If Convert.ToBoolean(App.LocalSettings.Values("IsWearLocationRightEnabled")) Then
@@ -84,29 +81,6 @@ Public NotInheritable Class SettingsPage
         bolLoading = False
 
     End Sub
-
-    Private Async Function GetNotificationsListenerAccess() As Task(Of Boolean)
-        Dim Listener As UserNotificationListener = Nothing
-        Dim AccessStatus As UserNotificationListenerAccessStatus = Nothing
-        Try
-            Listener = UserNotificationListener.Current
-            AccessStatus = Await Listener.RequestAccessAsync
-            Select Case AccessStatus
-                Case UserNotificationListenerAccessStatus.Allowed
-                    Return True
-                Case UserNotificationListenerAccessStatus.Denied, UserNotificationListenerAccessStatus.Unspecified
-                    Return False
-            End Select
-
-            Return False
-
-        Catch ex As Exception
-            Return False
-        Finally
-            Listener = Nothing
-            AccessStatus = Nothing
-        End Try
-    End Function
 
     Private Async Sub tsDisplay_Toggled(sender As Object, e As RoutedEventArgs)
         If bolLoading = False Then
@@ -195,23 +169,6 @@ Public NotInheritable Class SettingsPage
 
     End Sub
 
-    Private Async Sub tsMessage_Toggled(sender As Object, e As RoutedEventArgs)
-        pbProcessing.Visibility = Visibility.Visible
-        DirectCast(sender, ToggleSwitch).IsEnabled = False
-        Try
-            If tsMessage.IsOn Then
-                App.LocalSettings.Values(String.Format("Setting_{0}", CustomMiBandResult.BandOperation.Notifications)) = Await GetNotificationsListenerAccess()
-                tsMessage.IsOn = Convert.ToBoolean(App.LocalSettings.Values(String.Format("Setting_{0}", CustomMiBandResult.BandOperation.Notifications)))
-            End If
-
-        Catch ex As Exception
-            Helpers.DebugWriter(GetType(SettingsPage), ex.Message)
-        Finally
-            pbProcessing.Visibility = Visibility.Collapsed
-            DirectCast(sender, ToggleSwitch).IsEnabled = True
-        End Try
-    End Sub
-
     Private Sub tsDnD_Toggled(sender As Object, e As RoutedEventArgs)
         If bolLoading = False Then
             pbProcessing.Visibility = Visibility.Visible
@@ -278,9 +235,5 @@ Public NotInheritable Class SettingsPage
                 DirectCast(sender, RadioButton).IsEnabled = True
             End Try
         End If
-    End Sub
-
-    Private Sub tsAppIcons_Toggled(sender As Object, e As RoutedEventArgs)
-
     End Sub
 End Class

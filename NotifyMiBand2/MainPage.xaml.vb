@@ -133,10 +133,39 @@ Public NotInheritable Class MainPage
                 Debug.WriteLine($"BackgroundTask for Sync NOT running!")
             End If
 
+            ' Update List
+            btnSync_Click(sender, e)
+
+            ' Check Rights
+            Await GetNotificationsListenerAccess()
+
         Catch ex As Exception
             Debug.WriteLine($"ERROR: {ex.Message}")
         End Try
     End Sub
+
+    Private Async Function GetNotificationsListenerAccess() As Task(Of Boolean)
+        Dim Listener As UserNotificationListener = Nothing
+        Dim AccessStatus As UserNotificationListenerAccessStatus = Nothing
+        Try
+            Listener = UserNotificationListener.Current
+            AccessStatus = Await Listener.RequestAccessAsync
+            Select Case AccessStatus
+                Case UserNotificationListenerAccessStatus.Allowed
+                    Return True
+                Case UserNotificationListenerAccessStatus.Denied, UserNotificationListenerAccessStatus.Unspecified
+                    Return False
+            End Select
+
+            Return False
+
+        Catch ex As Exception
+            Return False
+        Finally
+            Listener = Nothing
+            AccessStatus = Nothing
+        End Try
+    End Function
 
     Private Sub Frame_DataContextChanged(sender As FrameworkElement, args As DataContextChangedEventArgs)
         If TryCast(args.NewValue, CustomMiBandResult) IsNot Nothing Then
@@ -153,7 +182,6 @@ Public NotInheritable Class MainPage
                     DirectCast(sender, Frame).Navigate(GetType(HeartratePage), App.CustomMiBand.HeartResult)
                 Case CustomMiBandResult.BandOperation.Welcome
                     DirectCast(sender, Frame).Navigate(GetType(WelcomePage))
-                    'Frame.Navigate(GetType(WelcomePage))
                 Case Else
 
             End Select

@@ -119,17 +119,13 @@ Public NotInheritable Class WelcomePage
 
                 Me.txtDeviceId.Text = _pickedDevice.Id
                 Me.txtDeviceName.Text = _pickedDevice.Name
-                Me.spDeviceinformations.Visibility = Visibility.Visible
 
-                Me.btnAddDevice.IsEnabled = True
                 Me.btnSave.IsEnabled = True
                 _readyToSave = True
             End If
 
         Catch ex As Exception
             Debug.WriteLine($"Error: {ex.Message}")
-            Me.pbAuthorize.Visibility = Visibility.Collapsed
-            Me.btnAddDevice.IsEnabled = True
             btnSave.IsEnabled = False
             _readyToSave = False
         Finally
@@ -139,24 +135,30 @@ Public NotInheritable Class WelcomePage
     End Sub
 
     Private Async Sub btnSave_Click(sender As Object, e As RoutedEventArgs)
-        Dim mMessageDialog As MessageDialog = Nothing
-        Dim mCommand As UICommand = Nothing
+        btnSave.IsEnabled = False
         Try
-            mMessageDialog = New MessageDialog("We have to restart the app that settings can be effective!", "Restart")
-            mCommand = New UICommand("Restart")
-            mMessageDialog.Commands.Add(mCommand)
             If _readyToSave = True Then
                 App.LocalSettings.Values("Setting_8") = False
-                Dim r = Await mMessageDialog.ShowAsync
+                App.LocalSettings.Values(String.Format("Setting_{0}", CInt(CustomMiBandResult.BandOperation.Battery))) = True
+                App.LocalSettings.Values(String.Format("Setting_{0}", CInt(CustomMiBandResult.BandOperation.Distance))) = True
+                App.LocalSettings.Values(String.Format("Setting_{0}", CInt(CustomMiBandResult.BandOperation.Steps))) = True
+                App.LocalSettings.Values(String.Format("Setting_{0}", CInt(CustomMiBandResult.BandOperation.Calories))) = True
+                App.LocalSettings.Values(String.Format("Setting_{0}", CInt(CustomMiBandResult.BandOperation.Heartrate))) = True
 
-                Application.Current.Exit()
+                App.CustomMiBand = New CustomMiBand
+                Dim r = Await App.CustomMiBand.ConnectWithAuth()
+                If r = True Then
+                    Await App.CustomMiBand.UpdateOperations()
+                Else
+                    'Device not reachable
+                End If
 
             End If
 
         Catch ex As Exception
 
         Finally
-            mMessageDialog = Nothing
+            btnSave.IsEnabled = True
         End Try
     End Sub
 End Class

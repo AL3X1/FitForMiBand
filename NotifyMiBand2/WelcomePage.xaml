@@ -26,14 +26,19 @@
         </StackPanel>
         <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" MaxWidth="500">
             <StackPanel Margin="20">
-                <ProgressBar Name="pbAuthorize" IsIndeterminate="True" Margin="10" Visibility="Collapsed"/>
                 <TextBlock Text="Setup your Device" Margin="0,10,0,5" FontSize="20"/>
-                <Button Name="btnAddDevice" Content="Add Device" Click="btnAddDevice_Click"/>
-                <StackPanel Name="spDeviceinformations" Visibility="Collapsed">
-                    <TextBlock Text="Selected Device" Margin="0,10,0,5"/>
-                    <TextBox PlaceholderText="Device Name" IsEnabled="False" Name="txtDeviceName" Margin="0,5,0,5"/>
-                    <TextBox PlaceholderText="Device ID" IsEnabled="False" Name="txtDeviceId" />
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Name="spDeviceinformations">
+                        <TextBlock Text="Selected Device" Margin="0,10,0,5"/>
+                        <TextBox PlaceholderText="Device Name" IsEnabled="False" Name="txtDeviceName" Margin="0,5,0,5"/>
+                        <TextBox PlaceholderText="Device ID" IsEnabled="False" Name="txtDeviceId" />
+                    </StackPanel>
+                    <Button Name="btnAddDevice" Content="Add Device" Click="btnAddDevice_Click" Grid.Column="1" Margin="10,0,0,0" Height="70" VerticalAlignment="Bottom"/>
+                </Grid>
                 <TextBlock Text="Setup your profile" TextWrapping="WrapWholeWords" FontSize="20" Margin="0,20,10,5"/>
                 <TextBlock Text="Alias"/>
                 <TextBox PlaceholderText="Alias" MaxLength="18" Margin="0,0,0,5" Name="txtAlias"/>
