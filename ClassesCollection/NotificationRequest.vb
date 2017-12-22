@@ -66,7 +66,7 @@ Public Class NotificationRequest
 
     Public Sub New(AppInfo As AppInfo)
         _DisplayName = AppInfo.DisplayInfo.DisplayName
-        _Id = AppInfo.AppUserModelId
+        _Id = AppInfo.PackageFamilyName
         _IsOn = True
         _DisplayMethod = DisplayMethods.AppDisplayName
 

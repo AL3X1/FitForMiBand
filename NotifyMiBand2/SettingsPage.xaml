@@ -17,7 +17,7 @@
             <Image Source="ms-appx:///Assets/Symbols/settings.png" HorizontalAlignment="Right" Margin="10" Height="30"/>
         </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
-            <StackPanel Margin="20" MaxWidth="560" HorizontalAlignment="Center">
+            <StackPanel Margin="20">
                 <ProgressBar Name="pbProcessing" IsEnabled="True" IsIndeterminate="True" Visibility="Collapsed"/>
                 <TextBlock Text="Available display items" FontSize="20" Margin="0,10,0,5" />
                 <TextBlock Text="" Name="lblDisplayItems" Foreground="DarkGray"/>
@@ -28,14 +28,14 @@
                 <ToggleSwitch Header="Display Date and Time" Name="tsDate" Toggled="tsDate_Toggled" />
                 <ToggleSwitch Header="Switch info on wrist rotate" Name="tsRotate" Toggled="tsRotate_Toggled"/>
                 <TextBlock Text="Device" FontSize="20" Margin="0,10,0,5" />
-                <TextBlock Text="Wear location"/>
+                <TextBlock Text="Where did you wear your Band?"/>
                 <RadioButton Name="rbRightHand" Content="Right Hand" Click="rbRightHand_Click"/>
                 <RadioButton Name="rbLeftHand" Content="Left Hand" Click="rbLeftHand_Click"/>
                 <ToggleSwitch Header="Do not disturb (automatic mode)" Name="tsDnD" Toggled="tsDnD_Toggled"/>
                 <TextBlock Text="Notifications" FontSize="20" Margin="0,10,0,5" />
-                <ToggleSwitch Header="Goal Notification" Name="tsGoal" Toggled="tsGoal_Toggled" />
+                <ToggleSwitch Header="Fitness-Goal Notification" Name="tsGoal" Toggled="tsGoal_Toggled" />
                 <TextBlock Text="Syncronisation" FontSize="20" Margin="0,10,0,5" />
-                <ComboBox Name="chkPeriodicSync" HorizontalAlignment="Stretch" Header="Periodic Sync (in minutes)" SelectionChanged="chkPeriodicSync_SelectionChanged">
+                <ComboBox Name="chkPeriodicSync" PlaceholderText="Off" HorizontalAlignment="Stretch" Header="Periodic Sync (in minutes)" SelectionChanged="chkPeriodicSync_SelectionChanged">
                     <x:String>Off</x:String>
                     <x:String>15</x:String>
                     <x:String>30</x:String>

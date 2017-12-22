@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="145"/>
+                    <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" VerticalAlignment="Bottom" Margin="10,0,0,10">
                     <TextBlock Text="{Binding Title}" FontSize="12" FontFamily="Segoe UI Light" Foreground="#99bdda" />

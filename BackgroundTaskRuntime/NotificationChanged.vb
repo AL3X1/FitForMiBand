@@ -39,14 +39,14 @@ Public NotInheritable Class NotificationChanged
                         Dim _validityTime As TimeSpan = DateTime.Now - UserNotification.CreationTime
                         If _validityTime.TotalSeconds < 5 Then
 
-                            If _customMiBand.NotificationResult.Requests.Where(Function(x) x.Id = UserNotification.AppInfo.AppUserModelId).Count = 0 Then
+                            If _customMiBand.NotificationResult.Requests.Where(Function(x) x.Id = UserNotification.AppInfo.PackageFamilyName).Count = 0 Then
                                 If UserNotification.AppInfo IsNot Nothing Then
                                     _customMiBand.NotificationResult.Add(UserNotification.AppInfo)
                                 End If
                             End If
 
                             ' Get NotificationRequest infos
-                            _singleNotification = _customMiBand.NotificationResult.Requests.FirstOrDefault(Function(x) x.Id = UserNotification.AppInfo.AppUserModelId)
+                            _singleNotification = _customMiBand.NotificationResult.Requests.FirstOrDefault(Function(x) x.Id = UserNotification.AppInfo.PackageFamilyName)
                             If _singleNotification IsNot Nothing Then
 
                                 ' Check if Notifications for that App is active

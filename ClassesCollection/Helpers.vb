@@ -1,35 +1,10 @@
 ﻿Imports System.Text
 Imports System.Xml
 Imports System.Xml.Serialization
+Imports Windows.Management.Deployment
 Imports Windows.Storage.Streams
 
 Public Class Helpers
-
-    Public Shared Async Function GetAppLogoById(ByVal Id As String) As Task(Of IRandomAccessStream)
-        'Dim _appInfo As Windows.ApplicationModel.Core.AppListEntry
-        'Dim _appLogo As BitmapImage
-        'Try
-        '    Dim _appList = Await Package.Current.GetAppListEntriesAsync()
-        '    If _appList IsNot Nothing Then
-        '        _appInfo = _appList.FirstOrDefault(Function(x) x.AppUserModelId.Contains(Id))
-        '        If _appInfo IsNot Nothing Then
-        '            If _appInfo.DisplayInfo IsNot Nothing Then
-        '                Return Await _appInfo.DisplayInfo.GetLogo(New Size(32, 32)).OpenReadAsync()
-        '            End If
-        '        End If
-        '    End If
-
-        '    Return Nothing
-
-        'Catch ex As Exception
-        Return Nothing
-        'Finally
-        '    _appInfo = Nothing
-        '    _appLogo = Nothing
-        'End Try
-    End Function
-
-
 
     Public Shared Function TimeSpanToText(ByVal value As DateTime) As String
         Dim _timeRemaining As TimeSpan = DateTime.Now - CDate(value)

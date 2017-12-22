@@ -15,14 +15,14 @@
         </Grid.Transitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="146"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Background="#005aa3">
-            <TextBlock Text="setup your fitness-goals and connect to device" Foreground="#99bdda" Margin="10,40,0,0" />
+            <TextBlock Text="setup your fitness-goals and connect to device" Foreground="#99bdda" Margin="10,10,0,0" />
             <TextBlock Text="welcome" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
-            <Image Source="ms-appx:///Assets/Symbols/welcome.png" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Height="30"/>
+            <Image Source="ms-appx:///Assets/Symbols/welcome.png" HorizontalAlignment="Right" Margin="0,0,10,0" Height="30"/>
         </StackPanel>
         <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" MaxWidth="500">
             <StackPanel Margin="20">

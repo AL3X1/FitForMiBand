@@ -16,13 +16,13 @@
         </Grid.Transitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="146"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Background="#005aa3">
-            <TextBlock Text="" Foreground="#99bdda" Margin="10,40,0,0" Name="lblTitle" />
+            <TextBlock Text="" Foreground="#99bdda" Margin="10,10,0,0" Name="lblTitle" />
             <TextBlock Text="distance summary" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
-            <Image Source="ms-appx:///Assets/Symbols/distance.png" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Height="30"/>
+            <Image Source="ms-appx:///Assets/Symbols/distance.png" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Height="30"/>
         </StackPanel>
         <Pivot Grid.Row="1" Margin="0,0,0,0">
             <PivotItem Header="day">

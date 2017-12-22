@@ -9,16 +9,16 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="146"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Background="#005aa3">
-            <TextBlock Text="display items" HorizontalAlignment="Left" FontSize="30" Margin="10, 60, 0, 0" Foreground="White" FontWeight="Light"/>
+            <TextBlock Text="display items" HorizontalAlignment="Left" FontSize="30" Margin="10, 40, 0, 0" Foreground="White" FontWeight="Light"/>
             <Image Source="ms-appx:///Assets/Symbols/clear_band.png" HorizontalAlignment="Right" Margin="10" Height="30"/>
         </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
-            <StackPanel Margin="20" HorizontalAlignment="Center" MaxWidth="560">
+            <StackPanel Margin="20">
                 <ProgressBar Name="pbProcessing" IsEnabled="True" IsIndeterminate="True" Visibility="Collapsed"/>
                 <TextBlock Text="Available display items" Margin="0,10,0,5" />
                 <ToggleSwitch Header="Display Clock" Name="tsClock" IsOn="True" IsEnabled="False" />
