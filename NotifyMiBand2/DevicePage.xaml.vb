@@ -30,29 +30,20 @@ Public NotInheritable Class DevicePage
             Me.lblTitle.Text = "Device found"
             Me.lblSubTitle.Text = "Trying to authenticate on Band..."
             Me.lblDescription.Text = "Tap on Band-Button to accept requested authentication!"
-            Me.pbProcess.IsIndeterminate = False
-            Me.pbProcess.Maximum = 10
-            Me.pbProcess.Minimum = 0
-
-            Dim delay As TimeSpan = TimeSpan.FromSeconds(1)
-            Dim delayTimer As ThreadPoolTimer = ThreadPoolTimer.CreateTimer(Async Sub()
-                                                                                Await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, Sub()
-                                                                                                                                                             Me.pbProcess.Value += 1
-                                                                                                                                                         End Sub)
-                                                                            End Sub, delay)
 
             App.CustomMiBand = New CustomMiBand
             If Await App.CustomMiBand.AuthenticateAppOnDevice() Then
-                delayTimer.Cancel()
-                ' Navigate to somewhere, everythings fine...
+                Frame.Navigate(GetType(MainPage))
             Else
-                ' Display Problems...
-                delayTimer.Cancel()
                 Me.pbProcess.IsIndeterminate = True
                 Me.lblTitle.Text = "Authentication failed!"
                 Me.lblSubTitle.Text = "Try again later..."
                 Me.lblDescription.Text = "Make sure you tapped on Band-Button, do not ignore requested authentication!"
             End If
+        Else
+            Me.lblTitle.Text = "Band not found"
+            Me.lblSubTitle.Text = "Make sure you already have paired your Band with your device..."
+            Me.lblDescription.Text = "Make sure that bluetooth-connection are enabled!"
         End If
 
     End Sub

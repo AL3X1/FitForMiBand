@@ -15,7 +15,8 @@ Public NotInheritable Class MainPage
             End If
 
             CustomMasterDetailsView.ItemsSource = Nothing
-            CustomMasterDetailsView.ItemsSource = App.CustomMiBand.DisplayItems.Where(Function(x) x.IsEnabled = True).OrderBy(Function(x) x.Operation)
+            'CustomMasterDetailsView.ItemsSource = App.CustomMiBand.DisplayItems.Where(Function(x) x.IsEnabled = True).OrderBy(Function(x) x.Operation)
+            CustomMasterDetailsView.ItemsSource = App.CustomMiBand.DisplayItems.OrderBy(Function(x) x.Operation)
 
         Catch ex As Exception
             Debug.WriteLine($"ERROR: {ex.Message}")
@@ -119,7 +120,7 @@ Public NotInheritable Class MainPage
     Private Async Sub MainPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Try
             CustomMasterDetailsView.ItemsSource = Nothing
-            CustomMasterDetailsView.ItemsSource = App.CustomMiBand.DisplayItems.Where(Function(x) x.IsEnabled = True).OrderBy(Function(x) x.Operation)
+            CustomMasterDetailsView.ItemsSource = App.CustomMiBand.DisplayItems.OrderBy(Function(x) x.Operation)
 
             If Await RegisterTaskForNotifications() Then
                 Debug.WriteLine($"BackgroundTask for Notifications running!")
@@ -180,8 +181,6 @@ Public NotInheritable Class MainPage
                     DirectCast(sender, Frame).Navigate(GetType(DistancePage), App.CustomMiBand.StepResult)
                 Case CustomMiBandResult.BandOperation.Heartrate
                     DirectCast(sender, Frame).Navigate(GetType(HeartratePage), App.CustomMiBand.HeartResult)
-                Case CustomMiBandResult.BandOperation.Welcome
-                    DirectCast(sender, Frame).Navigate(GetType(WelcomePage))
                 Case Else
 
             End Select

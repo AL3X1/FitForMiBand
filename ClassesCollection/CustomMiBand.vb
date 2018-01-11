@@ -96,7 +96,7 @@ Public Class CustomMiBand
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
     Public Event InitializationCompleted As AuthorizationCompletedEventHandler
 
-    Private ReadOnly WaitEvent As New ManualResetEvent(False)
+    Private WaitEvent As New EventWaitHandle(False, EventResetMode.ManualReset)
 
     Public Sub New()
         _DeviceId = ""
@@ -109,26 +109,20 @@ Public Class CustomMiBand
             _HeartResult = New HeartResult
             _NotificationResult = New NotificationResult
 
-            If _BatteryResult.Initialize Then
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Battery, _BatteryResult.Percentage.ToString("N0"), Helpers.TimeSpanToText(_BatteryResult.LastChargingDate)))
-            End If
+            _BatteryResult.Initialize()
+            _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Battery, _BatteryResult.Percentage.ToString("N0"), Helpers.TimeSpanToText(_BatteryResult.LastChargingDate)))
 
-            If _StepResult.Initialize Then
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Steps, _StepResult.TotalSteps.ToString, _StepResult.StepsReachedInPercent))
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Distance, _StepResult.TotalDistance.ToString, ""))
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Calories, _StepResult.TotalCals.ToString, ""))
-            End If
+            _StepResult.Initialize()
+            _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Steps, _StepResult.TotalSteps.ToString, _StepResult.StepsReachedInPercent))
+            _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Distance, _StepResult.TotalDistance.ToString, ""))
+            _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Calories, _StepResult.TotalCals.ToString, ""))
 
-            If _HeartResult.Initialize Then
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Heartrate, _HeartResult.HeartRate.ToString("N0"), _HeartResult.Title))
-            End If
+            '_HeartResult.Initialize()
+            '_DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Heartrate, _HeartResult.HeartRate.ToString("N0"), _HeartResult.Title))
 
             NotificationResult.Initialize()
             _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Notifications, _NotificationResult.Requests.Count.ToString, "Active"))
 
-        Else
-            LocalSettings.Values("Setting_8") = True
-            _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Welcome, "Welcome", "Tap to setup your device and profile"))
         End If
     End Sub
 
@@ -213,6 +207,8 @@ Public Class CustomMiBand
 
     Public Async Function AuthenticateAppOnDevice() As Task(Of Boolean)
         Try
+            Await Connect()
+
             Debug.WriteLine($"Request Handler for ValueChanged")
             GattCharacteristic = Await GetCharacteristic(GetService(CustomBluetoothProfile.Authentication.service), CustomBluetoothProfile.Authentication.authCharacteristic)
 
@@ -248,12 +244,13 @@ Public Class CustomMiBand
                 End If
             End If
 
-            Return WaitEvent.WaitOne(30000)
+            Return WaitEvent.WaitOne()
 
         Catch ex As Exception
             Return False
         Finally
             WaitEvent.Reset()
+            Disconnect()
         End Try
     End Function
 
@@ -580,7 +577,7 @@ Public Class CustomMiBand
                     _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Battery, _BatteryResult.Percentage.ToString("N0"), Helpers.TimeSpanToText(_BatteryResult.LastChargingDate)))
                 End If
 
-                _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Heartrate, _HeartResult.HeartRate.ToString("N0"), HeartResult.Title))
+                '  _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Heartrate, _HeartResult.HeartRate.ToString("N0"), HeartResult.Title))
 
                 NotificationResult.Initialize()
                 _DisplayItems.Add(New CustomMiBandResult(CustomMiBandResult.BandOperation.Notifications, _NotificationResult.Requests.Count.ToString, "Active"))
@@ -884,11 +881,11 @@ Public Class CustomMiBand
                 'End Select
 
                 If Await doChar.WriteValueAsync(_bytes.AsBuffer) = GattCommunicationStatus.Success Then
-                        Return True
-                    End If
+                    Return True
                 End If
+            End If
 
-                Return False
+            Return False
 
         Catch ex As Exception
             Return False

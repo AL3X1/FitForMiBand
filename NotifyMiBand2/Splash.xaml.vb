@@ -9,11 +9,14 @@ Public NotInheritable Class Splash
     Inherits Page
 
     Private Async Sub Splash_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        App.CustomBand = New CustomBand
-        Await App.CustomBand.GetDeviceByNameAsync()
-        Await App.CustomBand.AuthorizeOnDeviceAsync()
-
         App.CustomMiBand = New CustomMiBand
-        Frame.Navigate(GetType(MainPage))
+
+        If App.LocalSettings.Values("DeviceId") Is Nothing Then
+            Frame.Navigate(GetType(DevicePage))
+        Else
+            Await App.CustomMiBand.AuthenticateAppOnDevice
+            Frame.Navigate(GetType(MainPage))
+        End If
+
     End Sub
 End Class

@@ -14,7 +14,6 @@ Public Class CustomMiBandResult
         Battery = 5
         'Clock = 6
         Notifications = 7
-        Welcome = 8
         ClockAndDate = 9
     End Enum
 
@@ -68,16 +67,6 @@ Public Class CustomMiBandResult
         End Set
     End Property
 
-    Private _IsEnabled As Boolean
-    Public Property IsEnabled() As Boolean
-        Get
-            Return _IsEnabled
-        End Get
-        Set(ByVal value As Boolean)
-            _IsEnabled = value
-        End Set
-    End Property
-
     Private _NotificationResult As NotificationResult
     Public Property NotificationResult() As NotificationResult
         Get
@@ -99,17 +88,6 @@ Public Class CustomMiBandResult
         SetPictureOfOperation()
         SetUnitOfOperation()
 
-        If LocalSettings.Values(String.Format("Setting_{0}", _Operation)) IsNot Nothing Then
-            _IsEnabled = CBool(LocalSettings.Values(String.Format("Setting_{0}", _Operation)))
-        Else
-            _IsEnabled = False
-        End If
-
-        ' Override if Operation is Notification
-        If _Operation = BandOperation.Notifications Then
-            _IsEnabled = True
-        End If
-
         _Value = mValue
         _Title = mTitle
     End Sub
@@ -118,13 +96,6 @@ Public Class CustomMiBandResult
         _Operation = mOperation
         SetPictureOfOperation()
         SetUnitOfOperation()
-
-        If LocalSettings.Values(String.Format("Setting_{0}", _Operation)) IsNot Nothing Then
-            _IsEnabled = CBool(LocalSettings.Values(String.Format("Setting_{0}", _Operation)))
-        Else
-            _IsEnabled = False
-        End If
-
     End Sub
 
     Public Sub SetValue(ByVal mValue As String)
@@ -155,8 +126,6 @@ Public Class CustomMiBandResult
                     _PictureUrl = "ms-appx:///Assets/Symbols/steps.png"
                 Case BandOperation.Notifications
                     _PictureUrl = "ms-appx:///Assets/Symbols/message.png"
-                Case BandOperation.Welcome
-                    _PictureUrl = "ms-appx:///Assets/Symbols/welcome.png"
             End Select
         Catch ex As Exception
 
