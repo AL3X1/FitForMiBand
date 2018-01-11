@@ -8,7 +8,11 @@ Imports Windows.ApplicationModel.Core
 Public NotInheritable Class Splash
     Inherits Page
 
-    Private Sub Splash_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+    Private Async Sub Splash_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        App.CustomBand = New CustomBand
+        Await App.CustomBand.GetDeviceByNameAsync()
+        Await App.CustomBand.AuthorizeOnDeviceAsync()
+
         App.CustomMiBand = New CustomMiBand
         Frame.Navigate(GetType(MainPage))
     End Sub

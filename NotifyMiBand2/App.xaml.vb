@@ -10,6 +10,7 @@ NotInheritable Class App
 
     Public Shared LocalSettings As Windows.Storage.ApplicationDataContainer = Windows.Storage.ApplicationData.Current.LocalSettings
     Public Shared CustomMiBand As CustomMiBand
+    Public Shared CustomBand As CustomBand
 
     ''' <summary>
     ''' Wird aufgerufen, wenn die Anwendung durch den Endbenutzer normal gestartet wird. Weitere Einstiegspunkte

@@ -106,32 +106,33 @@ Public NotInheritable Class WelcomePage
         App.LocalSettings.Values("Profile_Alias") = Me.txtAlias.Text
     End Sub
 
-    Private Async Sub btnAddDevice_Click(sender As Object, e As RoutedEventArgs)
-        Dim _picker As DevicePicker = Nothing
-        Dim _pickedDevice As DeviceInformation = Nothing
-        Try
-            _picker = New DevicePicker
-            _picker.Filter.SupportedDeviceSelectors.Add(BluetoothLEDevice.GetDeviceSelectorFromPairingState(True))
-            _pickedDevice = Await _picker.PickSingleDeviceAsync(New Rect(0, 0, Window.Current.CoreWindow.Bounds.Width, Window.Current.CoreWindow.Bounds.Height))
-            If _pickedDevice IsNot Nothing Then
-                App.LocalSettings.Values("DeviceId") = _pickedDevice.Id
-                App.LocalSettings.Values("DeviceName") = _pickedDevice.Name
+    Private Sub btnAddDevice_Click(sender As Object, e As RoutedEventArgs)
+        Frame.Navigate(GetType(DevicePage))
+        'Dim _picker As DevicePicker = Nothing
+        'Dim _pickedDevice As DeviceInformation = Nothing
+        'Try
+        '    _picker = New DevicePicker
+        '    _picker.Filter.SupportedDeviceSelectors.Add(BluetoothLEDevice.GetDeviceSelectorFromPairingState(True))
+        '    _pickedDevice = Await _picker.PickSingleDeviceAsync(New Rect(0, 0, Window.Current.CoreWindow.Bounds.Width, Window.Current.CoreWindow.Bounds.Height))
+        '    If _pickedDevice IsNot Nothing Then
+        '        App.LocalSettings.Values("DeviceId") = _pickedDevice.Id
+        '        App.LocalSettings.Values("DeviceName") = _pickedDevice.Name
 
-                Me.txtDeviceId.Text = _pickedDevice.Id
-                Me.txtDeviceName.Text = _pickedDevice.Name
+        '        Me.txtDeviceId.Text = _pickedDevice.Id
+        '        Me.txtDeviceName.Text = _pickedDevice.Name
 
-                Me.btnSave.IsEnabled = True
-                _readyToSave = True
-            End If
+        '        Me.btnSave.IsEnabled = True
+        '        _readyToSave = True
+        '    End If
 
-        Catch ex As Exception
-            Debug.WriteLine($"Error: {ex.Message}")
-            btnSave.IsEnabled = False
-            _readyToSave = False
-        Finally
-            _picker = Nothing
-            _pickedDevice = Nothing
-        End Try
+        'Catch ex As Exception
+        '    Debug.WriteLine($"Error: {ex.Message}")
+        '    btnSave.IsEnabled = False
+        '    _readyToSave = False
+        'Finally
+        '    _picker = Nothing
+        '    _pickedDevice = Nothing
+        'End Try
     End Sub
 
     Private Async Sub btnSave_Click(sender As Object, e As RoutedEventArgs)

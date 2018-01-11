@@ -129,6 +129,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomBand.vb" />
     <Compile Include="HeartResult.vb" />
     <Compile Include="BatteryResult.vb" />
     <Compile Include="ClockResult.vb" />

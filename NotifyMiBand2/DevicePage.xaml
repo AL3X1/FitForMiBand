@@ -9,44 +9,24 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="146"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Background="#005aa3">
-            <TextBlock Text="mi band 2" Foreground="#99bdda" Margin="10,40,0,0" Name="lblTitle" />
-            <TextBlock Text="device" HorizontalAlignment="Left" FontSize="30" Margin="10, 0, 0, 0" Foreground="White" FontWeight="Light"/>
-            <Image Source="ms-appx:///Assets/Square44x44Logo.scale-200.png" HorizontalAlignment="Right" Margin="10" Height="30"/>
+            <TextBlock Text="Searching for Band..." FontSize="30" Margin="20" HorizontalAlignment="Center" Foreground="White" FontWeight="Light" Name="lblTitle"/>
+            <TextBlock Text="Keep the band close to your phone" Foreground="#99bdda" Margin="20" Name="lblSubTitle" HorizontalAlignment="Center" />
         </StackPanel>
-
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
-            <StackPanel Margin="20" MaxWidth="560">
-                <TextBlock Text="Firmware" Foreground="DarkGray" />
-                <TextBlock Name="lblVersion" Text="v2.1.2.3" />
-                <ToggleSwitch Name="twDoNotDisturb">
-                    <ToggleSwitch.Header>
-                        <TextBlock Text="Do not disturb" Foreground="DarkGray" Margin="0,5,0,0" TextWrapping="WrapWholeWords"/>
-                    </ToggleSwitch.Header>
-                </ToggleSwitch>
-                <TextBlock Text="Wear location" Foreground="DarkGray" Margin="0,5,0,0" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <ToggleButton Name="btnLeft" Height="40" Content="left hand" Margin="10"/>
-                    <ToggleButton Name="btnRight" Height="40" Content="right hand"/>
-                </StackPanel>
-                <TextBlock Text="Menus on Band" Margin="0,5,0,0" Foreground="DarkGray" />
-                <CheckBox Content="Clock with date" Name="chkClock"/>
-                <CheckBox Content="Steps" Name="chkSteps"/>
-                <CheckBox Content="Distance" Name="chkDistance"/>
-                <CheckBox Content="Calories" Name="chkCalories"/>
-                <CheckBox Content="Heart-Rate" Name="chkHeartRate"/>
-                <CheckBox Content="Battery" Name="chkBattery"/>
-                <ToggleSwitch Name="tsWristLift">
-                    <ToggleSwitch.Header>
-                        <TextBlock Text="Activate display on wrist lift" Foreground="DarkGray" Margin="0,5,0,0" TextWrapping="WrapWholeWords"/>
-                    </ToggleSwitch.Header>
-                </ToggleSwitch>
-                <TextBlock Text="App reset" Margin="0,5,0,0" Foreground="DarkGray" />
-                <Button Content="Reset" HorizontalAlignment="Stretch" Margin="10" Name="btnReset" Click="btnReset_Click" />
-            </StackPanel>
-        </ScrollViewer>
+        <Grid Background="#005aa3" Grid.Row="1">
+            <Image Source="ms-appx:///Assets/Symbols/clear_band.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" RenderTransformOrigin="0.5,0.5" >
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="80"/>
+                </Image.RenderTransform>
+            </Image>
+            <ProgressBar IsIndeterminate="True" Foreground="White" IsEnabled="True" VerticalAlignment="Bottom" Margin="2,0,2,50" Name="pbProcess"/>
+        </Grid>
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Make sure that Band is paired with your device." Foreground="#99bdda" Margin="20" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Name="lblDescription" />
+        </StackPanel>
     </Grid>
 </Page>
